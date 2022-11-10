@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 public class MyDLL<E> implements ListADT<E> {
 	private int size;
 	private Node head;
-	private Node one = null;
+	private Node tail;
 
 	@Override
 	public int size() {
@@ -14,28 +14,61 @@ public class MyDLL<E> implements ListADT<E> {
 
 	@Override
 	public void clear() {
-		head = null;
+		head = tail = null;
 		size = 0;
 
 	}
 
 	@Override
 	public boolean add(int index, E toAdd) throws NullPointerException, IndexOutOfBoundsException {
+		Node node = new Node(toAdd);
+		// check if the is out of bounds
+		Node tempNode = head;
+		if (index < size) {
 
-		Node node = new Node();
-		Node prevNode = new Node();
-		for (int i=0; i<size;i++) {
-			
-			if (i==index) {
-				node.setPrev(prevNode.getPrev());
+			if (isEmpty()) {
+				head = tail = node;
+				return true;
+			} else {
+
+				for (int i = 0; i < size; i++) {
+
+					if (i == index) {
+						node.setPrev(tempNode.getPrev());
+						node.setNext(tempNode.getNext());
+					} else {
+						tempNode = tempNode.getNext();
+					}
+				}
+
 			}
+			size++;
+		} else {
+			throw new IndexOutOfBoundsException();
 		}
 		return false;
 	}
 
 	@Override
 	public boolean add(E toAdd) throws NullPointerException {
-		// TODO Auto-generated method stub
+		Node node = new Node(toAdd);
+		// if the list is empty
+		if (isEmpty()) {
+			head = tail = node;
+			size++;
+			return true;
+
+		} else if (!isEmpty()) { // if the list is not empty
+			tail.setNext(node);
+
+			node.setPrev(tail);
+
+			tail = node;
+			tail.setNext(null);
+			size++;
+			return true;
+		}
+
 		return false;
 	}
 
@@ -47,7 +80,18 @@ public class MyDLL<E> implements ListADT<E> {
 
 	@Override
 	public E get(int index) throws IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
+		Node newNode = head;
+		if (index < 0 || index > size) {
+			throw new IndexOutOfBoundsException();
+		}
+		for (int i = 0; i < size; i++) {
+
+			if (i == index) {
+				return (E) newNode;
+			} else {
+				newNode.getNext();
+			}
+		}
 		return null;
 	}
 
@@ -91,7 +135,8 @@ public class MyDLL<E> implements ListADT<E> {
 
 	@Override
 	public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
+		Node newNode = head;
+		Node node = new Node(toChange);
 		return null;
 	}
 
