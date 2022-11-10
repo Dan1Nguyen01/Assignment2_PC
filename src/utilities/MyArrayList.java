@@ -37,6 +37,7 @@ public class MyArrayList<E> implements ListADT<E> {
 		}
 		if (size < array.length) {
 			for (int i = size - 1; i > 0; i--) {
+				//int i=0;i>size; i--;
 				array[i + 1] = array[i];
 			}
 			array[index] = toAdd;
@@ -54,7 +55,7 @@ public class MyArrayList<E> implements ListADT<E> {
 		}
 
 		if (size < array.length) {
-			add(size - 1, toAdd);
+			add(size, toAdd);
 			size++;
 			return true;
 		}

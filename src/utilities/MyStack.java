@@ -1,5 +1,6 @@
 package utilities;
 
+import java.lang.reflect.Array;
 import java.util.NoSuchElementException;
 
 public class MyStack<E> implements StackADT<E> {
@@ -92,14 +93,48 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		// flips inputted elements around.
+		// uses the stack in the system currently
+
+		Class<?> clazz = data.getClass().getComponentType();
+
+		E[] newArray = (E[]) Array.newInstance(clazz, size);
+
+		int stackIndex = size;
+
+		if (size > 0) {
+			for (int i = 0; i < size; i++) {
+				newArray[stackIndex - 1] = data[i];
+				stackIndex--;
+			}
+
+		}
+		return newArray;
 	}
 
 	@Override
 	public E[] toArray(E[] copy) throws NullPointerException {
-		// TODO Auto-generated method stub
-		return null;
+		if (copy == null) {
+			throw new NullPointerException();
+		}
+
+		if (copy.length < size) {
+			Class<?> clazz = copy.getClass().getComponentType();
+			copy = (E[]) Array.newInstance(clazz, size);
+
+			// if the array is too small, allocate the new array the same component type
+			// copy = (E[]) Array.newInstance(getClass().getComponentType(), size);
+		} else if (copy.length > size) {
+			copy[size] = null;
+		}
+
+		int stackIndex = size;
+		for (int i = 0; i < size; i++) {
+			copy[stackIndex - 1] = data[i];
+			stackIndex--;
+		}
+
+		return copy;
 	}
 
 	@Override

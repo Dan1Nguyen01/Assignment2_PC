@@ -84,40 +84,45 @@ public class MyDLL<E> implements ListADT<E> {
 		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException();
 		}
-		for (int i = 0; i < size; i++) {
-
-			if (i == index) {
-				return (E) newNode;
-			} else {
-				newNode.getNext();
-			}
+		for (int i = 0; i < index; i++) {
+			newNode = newNode.getNext();
 		}
-		return null;
+		return (E) newNode;
 	}
 
 	@Override
 	public E remove(int index) throws IndexOutOfBoundsException {
-		Node temp1 = head;
-		Node temp2 = null;
-		if (index == 0) {
-			head = head.getNext();
-		} else if (index > size) {
+		if (index > size || index < 0) {
 			throw new IndexOutOfBoundsException(
 					"The position [ " + index + " ] is greater than the current size " + size + ".");
+		}
+
+		Node node = null;
+		if (size == 1) {
+			node = (Node) head.getData();
+			clear();
+		} else if (index == 0) {
+			node = (Node) head.getData();
+			head = head.getNext();
+			head.setPrev(null);
+		} else if (index == size - 1) {
+			Node tempNode = head;
+			while (tempNode.getNext() != null) {
+				tempNode = tempNode.getNext();
+			}
+
 		} else {
 
-			for (int i = 0; i < index - 1; i++) {
-				temp1 = temp1.getNext();
-			}
-			temp2 = temp1.getNext();
-			temp1.setNext(temp2.getNext());
-			size--;
 		}
-		return (E) temp2;
+
+		return (E) node;
 	}
 
 	@Override
 	public E remove(E toRemove) throws NullPointerException {
+		if (size == 0) {
+			throw new NullPointerException();
+		}
 		Node node = head;
 		while (node != null) {
 			node = node.getNext();
