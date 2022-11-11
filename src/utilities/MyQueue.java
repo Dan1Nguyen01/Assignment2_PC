@@ -1,12 +1,10 @@
 package utilities;
 
+import java.lang.reflect.Array;
 import java.util.NoSuchElementException;
 
 public class MyQueue<E> implements QueueADT<E> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4895599864565933543L;
 	private int capacity;
 	private int size;
@@ -61,7 +59,6 @@ public class MyQueue<E> implements QueueADT<E> {
 
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
 		return new MyQueueIterator();
 	}
 
@@ -87,14 +84,43 @@ public class MyQueue<E> implements QueueADT<E> {
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		// flips inputted elements around.
+		// uses the stack in the system currently
+
+		Class<?> c1 = data.getClass().getComponentType();
+
+		E[] newArray = (E[]) Array.newInstance(c1, size);
+
+		int queueIndex = size;
+
+		if (size > 0) {
+			for (int i = 0; i < size; i++) {
+				newArray[i] = data[i];
+			}
+
+		}
+		return newArray;
 	}
 
 	@Override
 	public E[] toArray(E[] copy) throws NullPointerException {
-		// TODO Auto-generated method stub
-		return null;
+
+		if (copy == null) {
+			throw new NullPointerException();
+		}
+		if (copy.length < size) {
+			// if the array is too small, allocate the new array the same component type
+			copy = (E[]) Array.newInstance(getClass().getComponentType(), size);
+		} else if (copy.length > size) {
+			copy[size] = null;
+		}
+		int i = 0;
+		for (E element : copy) {
+			copy[i] = element;
+			i++;
+
+		}
+		return copy;
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class MyArrayList<E> implements ListADT<E> {
 		}
 		if (size < array.length) {
 			for (int i = size - 1; i > 0; i--) {
-				//int i=0;i>size; i--;
+				// int i=0;i>size; i--;
 				array[i + 1] = array[i];
 			}
 			array[index] = toAdd;
@@ -79,19 +79,42 @@ public class MyArrayList<E> implements ListADT<E> {
 	@Override
 	public E remove(int index) throws IndexOutOfBoundsException {
 		// TODO Auto-generated method stub
+		if (index < 0 || index > size) {
+			throw new IndexOutOfBoundsException();
+		} else {
+			remove(get(index));
+		}
 		return null;
 	}
 
 	@Override
 	public E remove(Object toRemove) throws NullPointerException {
+
+		boolean isRemoved = false;
+
 		if (array == null) {
 			throw new NullPointerException();
 		}
+		Object[] updated = array;
 		for (int i = 0; i < size; i++) {
-			if (array[i] == toRemove) {
-				array[i] = array[i + 1];
+			// Looks for selected object in array
+			if (array[i] == toRemove && isRemoved == false) {
+				updated[i] = array[i + 1];
+				isRemoved = true;
+			} // when found the rest of the array is shifted over
+			else if (isRemoved == true) {
+				// when the end is reached
+				if (array[i + 1] == null) {
+					updated[i] = array[i + 1];
+					this.array = (E[]) updated;
+					this.size = i;
+					return null;
+				} else {
+					updated[i] = array[i + 1];
+				}
 			}
 		}
+
 		return null;
 	}
 

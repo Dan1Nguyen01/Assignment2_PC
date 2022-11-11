@@ -3,6 +3,8 @@ package utilities;
 import java.lang.reflect.Array;
 import java.util.NoSuchElementException;
 
+import javax.lang.model.type.ArrayType;
+
 public class MyStack<E> implements StackADT<E> {
 
 	/**
@@ -12,6 +14,8 @@ public class MyStack<E> implements StackADT<E> {
 	private int capacity;
 	private E[] data = null;
 	private int size;
+
+	private E[] elements;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -52,9 +56,6 @@ public class MyStack<E> implements StackADT<E> {
 		return data[size - 1];
 	}
 
-	/*
-	 * NOT SURE what it does
-	 */
 	@Override
 	public boolean equals(StackADT<E> that) {
 		for (int i = 0; i < data.length; i++) {
@@ -119,22 +120,47 @@ public class MyStack<E> implements StackADT<E> {
 		}
 
 		if (copy.length < size) {
-			Class<?> clazz = copy.getClass().getComponentType();
-			copy = (E[]) Array.newInstance(clazz, size);
 
-			// if the array is too small, allocate the new array the same component type
-			// copy = (E[]) Array.newInstance(getClass().getComponentType(), size);
-		} else if (copy.length > size) {
-			copy[size] = null;
+			Class<?> clazz = copy.getClass().getComponentType();
+			E[] a = (E[]) Array.newInstance(clazz, copy.length + 1);
+			int i = 0;
+
+			for (E element : copy) {
+				copy[i] = element;
+				i++;
+			}
+			for (int j = 0; j < copy.length; j++) {
+				a[j] = copy[j];
+			}
+			a[copy.length] = null;
+			System.out.println(a[copy.length]);
+			copy = a;
 		}
 
-		int stackIndex = size;
-		for (int i = 0; i < size; i++) {
-			copy[stackIndex - 1] = data[i];
+		else {
+			int i = 0;
+			for (E element : copy) {
+				if (element == null) {
+					return copy;
+				} else {
+					copy[i] = element;
+					i++;
+				}
+			}
+
+		}
+		Class<?> clazz = copy.getClass().getComponentType();
+		E[] newArray = (E[]) Array.newInstance(clazz, copy.length + 1);
+		int stackIndex = copy.length + 1;
+
+		for (int b = 0; b < copy.length; b++) {
+			newArray[stackIndex - 1] = copy[b];
 			stackIndex--;
 		}
 
+		copy = newArray;
 		return copy;
+
 	}
 
 	@Override
