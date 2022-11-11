@@ -10,35 +10,50 @@ public class Driver {
 		// TODO Auto-generated method stub
 		MyStack myStack = new MyStack();
 
-		MyQueue<String> q1 = new MyQueue<String>();
+		MyQueue q1 = new MyQueue();
 
-		MyDLL<String> d1 = new MyDLL<String>();
-
-		MyDLL<String> d2 = new MyDLL<String>();
-
-		d1.add("A");
-		d1.add("B");
-		d1.add("C");
-		d1.add("X");
-
-		d1.remove("A");
+//		myStack.Stack(10);
+//		myStack.push(10);
+//		myStack.push(20);
+//		myStack.push(30);
+//		myStack.push(40);
 //
-//		System.out.println(d1.get(1));
+//		myStack.pop();
 //
-//		MyDLL<String> d = new MyDLL<String>();
-		d2.add("Z");
-		d2.add("L");
-		d2.add("O");
+//
+//		Object[] stack = myStack.toArray();
+//
+//		for (int i = 0; i < stack.length; i++) {
+//			System.out.println("Element in array: " + stack[i]);
 
+		q1.enqueue("A");
+		q1.enqueue("b");
+		q1.enqueue("C");
 		
-		d1.addAll(d2);
-//		System.out.println(d1.get(1));
+		System.out.print(q1.equals(q1));
 
-		Object[] a2 = d1.toArray();
-
-		for (int i = 0; i < a2.length; i++) {
-			System.out.println("Element in array: " + a2[i]);
-		}
+//		MyDLL<String> d1 = new MyDLL<String>();
+//
+//		MyDLL<String> d2 = new MyDLL<String>();
+//
+//		d1.add("A");
+//		d1.add("B");
+//		d1.add("C");
+//		d1.add("X");
+//
+//		d1.remove("A");
+//
+//		d2.add("Z");
+//		d2.add("L");
+//		d2.add("O");
+//
+//		d1.addAll(d2);
+//
+//		Object[] a2 = d1.toArray();
+//
+//		for (int i = 0; i < a2.length; i++) {
+//			System.out.println("Element in array: " + a2[i]);
+//		}
 
 //		System.out.println("Does the DLL contain this letter? " + d1.contains("A"));
 //
@@ -60,5 +75,4 @@ public class Driver {
 		// String[] a1 = { "yerr", "berr", "jerr" };
 
 	}
-
 }

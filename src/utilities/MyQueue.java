@@ -17,44 +17,66 @@ public class MyQueue<E> implements QueueADT<E> {
 		this.capacity = capacity;
 		data = (E[]) new Object[capacity];
 		size = 0;
-		front = -1;
+		front = 0;
 	}
 
 	@Override
 	public E enqueue(E element) throws NullPointerException {
-		size++;
-		data[size - 1] = element;
+		if (size >= capacity) {
+			System.out.println("Queue is full");
+		} else {
+			size++;
+			data[size - 1] = element;
 
-		System.out.println("The element element was added , which is: ");
+			System.out.println("The element element was added , which is: " + element);
+		}
+
 		return element;
 	}
 
 	@Override
 	public E dequeue() throws NullPointerException {
+		if (size < 0) {
+			throw new NullPointerException();
+		}
 		size--;
 		front++;
-		System.out.println("The element at the front is: ");
+		System.out.println("The element at the front is: " + data[front]);
 		return data[front];
 	}
 
 	@Override
 	public E peek() throws NullPointerException, IndexOutOfBoundsException {
-		if (front < 0) {
-			System.out.println("The queue is empty");
-			return null;
-		} else
+		if (size == 0) {
+			throw new NullPointerException();
+		}
+
+		if (front == -1) {
+			return data[0];
+		} else {
 			return data[front];
+		}
 
 	}
 
 	@Override
 	public boolean equals(QueueADT<E> that) {
-		for (int i = 0; i < data.length; i++) {
-			if (data[i] == that) {
-				return true;
+
+		Object thatArray[] = that.toArray();
+		boolean equals = false;
+		if (size == thatArray.length) {
+			for (int i = 0; i < size; i++) {
+				if (data[i].equals(thatArray[i])) {
+					equals = true;
+				}else {
+					equals = false;
+					break;
+				}
+
 			}
+			
 		}
-		return false;
+		return equals;
 	}
 
 	@Override
@@ -149,6 +171,22 @@ public class MyQueue<E> implements QueueADT<E> {
 		size = 0;
 		data = null;
 
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public E[] getData() {
+		return data;
+	}
+
+	public void setData(E[] data) {
+		this.data = data;
 	}
 
 }

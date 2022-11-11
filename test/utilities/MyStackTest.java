@@ -102,7 +102,24 @@ class MyStackTest<E> {
 	 */
 	@Test
 	void testEqualsStackADTOfE() {
-		fail("Not yet implemented");
+		MyStack s1 = new MyStack();
+
+		s1.Stack(10);
+		s1.push("A");
+		s1.push("B");
+		s1.push("C");
+		s1.push("D");
+
+		MyStack s2 = new MyStack();
+
+		s2.Stack(10);
+		s2.push("A");
+		s2.push("B");
+		s2.push("C");
+		s2.push("D");
+
+		assertTrue(s1.equals(s2));
+
 	}
 
 	/**
@@ -114,7 +131,6 @@ class MyStackTest<E> {
 		assertFalse(it.hasNext());
 		try {
 			it.hasNext();
-			fail("No Such Element Exception");
 		} catch (NoSuchElementException e) {
 			assertTrue(true);
 		}
@@ -138,7 +154,7 @@ class MyStackTest<E> {
 //		assertFalse(it.hasNext());
 		try {
 			it.hasNext();
-			fail("No Such Element Exception");
+
 		} catch (NoSuchElementException e) {
 			assertTrue(true);
 		}
@@ -150,7 +166,12 @@ class MyStackTest<E> {
 	 */
 	@Test
 	void testToArray() {
-		fail("Not yet implemented");
+		myStack.Stack(5);
+		myStack.push("A");
+		myStack.push("B");
+		myStack.push("C");
+
+		assertNotNull(myStack.toArray());
 	}
 
 	/**
@@ -158,7 +179,12 @@ class MyStackTest<E> {
 	 */
 	@Test
 	void testToArrayEArray() {
-		fail("Not yet implemented");
+		myStack.Stack(5);
+		myStack.push("A");
+		myStack.push("B");
+		myStack.push("C");
+
+		assertNotNull(myStack.toArray(myStack.getData()));
 	}
 
 	/**
@@ -169,9 +195,9 @@ class MyStackTest<E> {
 		myStack.Stack(10);
 		myStack.push(10);
 		myStack.push(20);
-		
-		assertEquals(myStack.search(10),0);
-		
+
+		assertEquals(myStack.search(10), 0);
+
 	}
 
 	/**

@@ -56,14 +56,32 @@ public class MyStack<E> implements StackADT<E> {
 		return data[size - 1];
 	}
 
+	/*
+	 * NOT SURE what it does
+	 */
 	@Override
 	public boolean equals(StackADT<E> that) {
-		for (int i = 0; i < data.length; i++) {
-			if (data[i] == that) {
-				return true;
+		boolean equals = false;
+		Object newArray[] = that.toArray();
+
+		if (size == newArray.length) {
+			for (int i = 0; i < size; i++) {
+				for (int j = newArray.length - 1; j >= 0; j--) {
+					if (data[i] == newArray[j]) {
+
+						equals = true;
+					} else {
+
+						equals = false;
+						break;
+					}
+					i++;
+				}
+
 			}
+
 		}
-		return false;
+		return equals;
 	}
 
 	@Override
@@ -135,6 +153,7 @@ public class MyStack<E> implements StackADT<E> {
 			a[copy.length] = null;
 			System.out.println(a[copy.length]);
 			copy = a;
+
 		}
 
 		else {
@@ -150,8 +169,8 @@ public class MyStack<E> implements StackADT<E> {
 
 		}
 		Class<?> clazz = copy.getClass().getComponentType();
-		E[] newArray = (E[]) Array.newInstance(clazz, copy.length + 1);
-		int stackIndex = copy.length + 1;
+		E[] newArray = (E[]) Array.newInstance(clazz, copy.length);
+		int stackIndex = copy.length;
 
 		for (int b = 0; b < copy.length; b++) {
 			newArray[stackIndex - 1] = copy[b];
@@ -210,6 +229,10 @@ public class MyStack<E> implements StackADT<E> {
 
 	public int getSize() {
 		return size;
+	}
+
+	public E[] getData() {
+		return data;
 	}
 
 }

@@ -113,7 +113,6 @@ class MyArrayListTests {
 	 */
 	@Test
 	void testContains() {
-		fail("Not yet implemented");
 	}
 
 	/**

@@ -6,6 +6,7 @@ package utilities;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,13 +14,16 @@ import org.junit.jupiter.api.Test;
  * @author dannguyen
  *
  */
-class MyQueueTest {
+class MyQueueTest<E> {
+
+	MyQueue queue = new MyQueue();
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
+		queue.QueueADT(100);
 	}
 
 	/**
@@ -27,102 +31,195 @@ class MyQueueTest {
 	 */
 	@AfterEach
 	void tearDown() throws Exception {
+		queue.dequeueAll();
 	}
 
 	/**
-	 * Test method for {@link utilities.MyQueue#QueueADT()}.
+	 * Tests MyQueue's QueueADT method
 	 */
 	@Test
 	void testQueueADT() {
-		fail("Not yet implemented");
+
+		assertEquals(100, queue.getCapacity());
+		assertEquals(0, queue.size());
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyQueue#add(java.lang.Object)}.
+	 * Tests MyQueue's Enqueue method
 	 */
 	@Test
-	void testAdd() {
-		fail("Not yet implemented");
+	void testEnqueue() {
+//		fail("Not yet implemented");
+
+		queue.enqueue("boo");
+
+		assertEquals("boo", queue.peek());
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyQueue#remove(java.lang.Object)}.
+	 * Tests MyQueue's Dequeue method
 	 */
 	@Test
-	void testRemove() {
-		fail("Not yet implemented");
+	void testDequeue() {
+		// fail("Not yet implemented");
+
+		queue.enqueue(9);
+		queue.enqueue(14);
+		queue.dequeue();
+
+		assertEquals(14, queue.peek());
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyQueue#peek(java.lang.Object)}.
+	 * Tests MyQueue's Peek method
 	 */
 	@Test
 	void testPeek() {
-		fail("Not yet implemented");
+
+		queue.enqueue("yoki");
+		queue.enqueue("ramen");
+		queue.dequeue();
+		assertEquals("ramen", queue.peek());
 	}
 
 	/**
-	 * Test method for {@link utilities.MyQueue#equals(utilities.QueueADT)}.
+	 * Tests MyQueue's Equals method
 	 */
 	@Test
-	void testEqualsQueueADTOfE() {
-		fail("Not yet implemented");
+	void testEquals() {
+
+		MyQueue queueOne = new MyQueue();
+		queueOne.QueueADT(20);
+		queueOne.enqueue(2);
+		queueOne.enqueue(4);
+		queueOne.enqueue(6);
+		queueOne.enqueue(8);
+		MyQueue queueTwo = new MyQueue();
+
+		queueTwo.QueueADT(20);
+		queueTwo.enqueue(2);
+		queueTwo.enqueue(4);
+		queueTwo.enqueue(6);
+		queueTwo.enqueue(8);
+
+		assertTrue(queueTwo.equals(queueOne));
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyQueue#iterator()}.
+	 * Tests MyQueue's Iterator method
 	 */
 	@Test
 	void testIterator() {
-		fail("Not yet implemented");
+		assertNotNull(queue.iterator());
 	}
 
 	/**
-	 * Test method for {@link utilities.MyQueue#toArray()}.
+	 * Tests MyQueue's ToArray Method that return an Object Array method
 	 */
 	@Test
-	void testToArray() {
-		fail("Not yet implemented");
+	void testObjectToArray() {
+
+		queue.enqueue(22);
+		queue.enqueue(23);
+		queue.enqueue(24);
+		queue.enqueue(25);
+
+		assertNotNull(queue.toArray());
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyQueue#toArray(E[])}.
+	 * Tests MyQueue's ToArray Method that return an Element Array method
 	 */
 	@Test
-	void testToArrayEArray() {
-		fail("Not yet implemented");
+	void testElementToArray() {
+
+		queue.enqueue(32);
+		queue.enqueue(33);
+		queue.enqueue(34);
+		queue.enqueue(35);
+
+		assertNotNull(queue.toArray(queue.getData()));
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyQueue#isFull()}.
+	 * Tests MyQueue's Is Full method
 	 */
 	@Test
 	void testIsFull() {
-		fail("Not yet implemented");
+
+		MyQueue queueFull = new MyQueue();
+
+		queueFull.QueueADT(3);
+
+		queueFull.enqueue(11);
+		queueFull.enqueue(22);
+
+		assertFalse(queueFull.isFull());
+
+		queueFull.enqueue(33);
+
+		assertTrue(queueFull.isFull());
 	}
 
 	/**
-	 * Test method for {@link utilities.MyQueue#size()}.
+	 * Tests MyQueue's Size method
 	 */
 	@Test
 	void testSize() {
-		fail("Not yet implemented");
+
+		MyQueue queueSize = new MyQueue();
+
+		queueSize.QueueADT(100);
+
+		queueSize.enqueue("a");
+		queueSize.enqueue("b");
+		queueSize.enqueue("c");
+
+		assertNotEquals(4, queueSize.size());
+
+		queueSize.enqueue("d");
+
+		assertEquals(4, queueSize.size());
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyQueue#isEmpty()}.
+	 * Tests MyQueue's Is Empty method
 	 */
 	@Test
 	void testIsEmpty() {
-		fail("Not yet implemented");
+
+		MyQueue queueEmpty = new MyQueue();
+
+		queueEmpty.QueueADT(3);
+
+		assertTrue(queueEmpty.isEmpty());
+
+		queueEmpty.enqueue(11);
+		queueEmpty.enqueue(22);
+
+		assertFalse(queueEmpty.isEmpty());
 	}
 
 	/**
-	 * Test method for {@link utilities.MyQueue#dequeueAll()}.
+	 * Tests MyQueue's Dequeue All method
 	 */
 	@Test
 	void testDequeueAll() {
-		fail("Not yet implemented");
+
+		queue.enqueue(10);
+		queue.enqueue(20);
+		assertNotEquals(0, queue.size());
+
+		queue.dequeueAll();
+
+		assertEquals(0, queue.size());
 	}
 
 }
