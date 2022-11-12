@@ -84,20 +84,20 @@ public class MyDLL<E> implements ListADT<E> {
 
 	@Override
 	public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
-		
-		 E newArray =(E) toAdd.toArray();
-		
-		if (toAdd.size()==0) {
+
+		E newArray = (E) toAdd.toArray();
+
+		if (toAdd.size() == 0) {
 			throw new NullPointerException();
 		}
-		
-		if (toAdd.size()!=0) {
-			for (int i =0; i<toAdd.size();i++) {
-				add( toAdd.get(i));
+
+		if (toAdd.size() != 0) {
+			for (int i = 0; i < toAdd.size(); i++) {
+				add(toAdd.get(i));
 			}
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -123,33 +123,36 @@ public class MyDLL<E> implements ListADT<E> {
 	@Override
 	public E remove(int index) throws IndexOutOfBoundsException {
 
-		if (index > size || index < 0) {
+		if (index > size - 1 || index < 0) {
 			throw new IndexOutOfBoundsException(
 					"The position [ " + index + " ] is greater than the current size " + size + ".");
 		}
 
-		Node node = null;
-		if (size == 1) {// only 1 element
-			node = (Node) head.getData();
+		Node node = head;
+		if (size == 1 && index == 0) {// only 1 element
 			clear();
-		} else if (index == 0) {// delete first
-			node = (Node) head.getData();
+		} else if (index == 0 && size > 1) {// delete first
 			head = head.getNext();
 			head.setPrev(null);
 		} else if (index == size - 1) {// delete last
 			node = tail;
 			tail.getPrev().setNext(null);
-			;
+			tail.setPrev(null);
 
 		} else {
 			int i = 0;
-			node = head;
-			while (i < index) {
-				node = node.getNext();
+			while (node != null) {
+
+				if (i == index) {
+					node.getNext().setPrev(node.getPrev());
+					node.getPrev().setNext(node.getNext());
+
+				} else {
+					node = node.getNext();
+				}
+				i++;
 			}
 
-			node.getPrev().setNext(node.getNext());
-			node.getNext().setPrev(node.getPrev());
 		}
 
 		size--;
@@ -164,28 +167,29 @@ public class MyDLL<E> implements ListADT<E> {
 		Node node = head;
 		int i = 0;
 
-		if (node.getData().equals(toRemove)) {
-			if (node == tail) {
-				tail.getPrev().setNext(null);
-				tail.setNext(null);
+		while (node != null) {
+			if (node.getData().equals(toRemove)) {
+				if (node == tail) {
+					tail.getPrev().setNext(null);
+					tail.setNext(null);
 
-			} else if (node == head) {
-				head = head.getNext();
-				head.getPrev().setNext(null);
-				head.setPrev(null);
+				} else if (node.getPrev() == null) {
+					head = head.getNext();
+					head.getPrev().setNext(null);
+					head.setPrev(null);
 
-			} else if (node != head || node != tail) {
-				node.getPrev().setNext(node.getNext());
-				node.getNext().setPrev(node.getPrev());
+				} else if (node != head || node != tail) {
+					node.getPrev().setNext(node.getNext());
+					node.getNext().setPrev(node.getPrev());
+
+				}
 
 			}
-
-		} else {
-			node = node.getNext();
+			node= node.getNext();
 		}
 
 		size--;
-		return (E) node;// check this
+		return (E) node;
 
 	}
 

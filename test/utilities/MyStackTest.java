@@ -131,6 +131,7 @@ class MyStackTest<E> {
 		assertFalse(it.hasNext());
 		try {
 			it.hasNext();
+			fail("No Such Element Exception");
 		} catch (NoSuchElementException e) {
 			assertTrue(true);
 		}
@@ -143,17 +144,18 @@ class MyStackTest<E> {
 		myStack.push(60);
 		myStack.push(30);
 
-		Iterator it = stack.iterator();
+		Iterator<E> it = stack.iterator();
+		assertTrue(it.hasNext());
 
 		int i = 0;
 		while (it.hasNext()) {
 			assertEquals(myStack.peek(), it.next());
-			myStack.pop();
 
 		}
-//		assertFalse(it.hasNext());
+		assertFalse(it.hasNext());
 		try {
 			it.hasNext();
+			fail("No Such Element Exception");
 
 		} catch (NoSuchElementException e) {
 			assertTrue(true);

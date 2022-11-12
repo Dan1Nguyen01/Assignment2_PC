@@ -5,6 +5,8 @@ package utilities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -113,8 +115,38 @@ class MyQueueTest<E> {
 	 * Tests MyQueue's Iterator method
 	 */
 	@Test
-	void testIterator() {
-		assertNotNull(queue.iterator());
+	void testIteratorEmpty() {
+		Iterator<E> it = queue.iterator();
+		assertFalse(it.hasNext());
+		try {
+			it.hasNext();
+			fail("No Such Element Exception");
+		} catch (NoSuchElementException ex) {
+			assertTrue(true);
+		}
+	}
+
+	@Test
+	void testIteratorNotEmpty() {
+		queue.QueueADT(10);
+
+		queue.enqueue(20);
+		queue.enqueue(30);
+
+		Iterator<E> it = queue.iterator();
+		assertTrue(it.hasNext());
+
+		int i = 0;
+		while (it.hasNext()) {
+			assertEquals(queue.peek(), it.next());
+		}
+		assertFalse(it.hasNext());
+		try {
+			it.hasNext();
+			fail("No Such Element Exception");
+		} catch (NoSuchElementException ex) {
+			assertTrue(true);
+		}
 	}
 
 	/**

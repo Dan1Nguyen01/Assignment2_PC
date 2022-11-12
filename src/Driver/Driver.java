@@ -25,36 +25,25 @@ public class Driver {
 //
 //		for (int i = 0; i < stack.length; i++) {
 //			System.out.println("Element in array: " + stack[i]);
+//
+//		q1.enqueue("A");
+//		q1.enqueue("b");
+//		q1.enqueue("C");
 
-		q1.enqueue("A");
-		q1.enqueue("b");
-		q1.enqueue("C");
+		MyDLL<String> d1 = new MyDLL<String>();
+
+		d1.add("A");
+		d1.add("B");
+		d1.add("C");
+		d1.add("X");
 		
-		System.out.print(q1.equals(q1));
+		d1.remove("B");
+		Object[] a = d1.toArray();
 
-//		MyDLL<String> d1 = new MyDLL<String>();
-//
-//		MyDLL<String> d2 = new MyDLL<String>();
-//
-//		d1.add("A");
-//		d1.add("B");
-//		d1.add("C");
-//		d1.add("X");
-//
-//		d1.remove("A");
-//
-//		d2.add("Z");
-//		d2.add("L");
-//		d2.add("O");
-//
-//		d1.addAll(d2);
-//
-//		Object[] a2 = d1.toArray();
-//
-//		for (int i = 0; i < a2.length; i++) {
-//			System.out.println("Element in array: " + a2[i]);
-//		}
-
+		for (int i = 0; i < a.length; i++) {
+			System.out.println("Element in array: " + a[i]);
+		}
+		
 //		System.out.println("Does the DLL contain this letter? " + d1.contains("A"));
 //
 //		System.out.println("Does first DLL = second DLL? " + d1.equals(d2));

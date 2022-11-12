@@ -24,6 +24,7 @@ public class MyArrayList<E> implements ListADT<E> {
 	@Override
 	public void clear() {
 		array = null;
+		size = 0;
 
 	}
 
@@ -56,7 +57,6 @@ public class MyArrayList<E> implements ListADT<E> {
 
 		if (size < array.length) {
 			add(size, toAdd);
-			size++;
 			return true;
 		}
 		return false;
@@ -64,7 +64,18 @@ public class MyArrayList<E> implements ListADT<E> {
 
 	@Override
 	public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
-		// TODO Auto-generated method stub
+
+		if (toAdd.size() == 0) {
+			throw new NullPointerException();
+		}
+
+		if (toAdd.size() != 0) {
+			for (int i = 0; i < toAdd.size(); i++) {
+				add(toAdd.get(i));
+			}
+			return true;
+		}
+
 		return false;
 	}
 
@@ -82,9 +93,9 @@ public class MyArrayList<E> implements ListADT<E> {
 		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException();
 		} else {
-			remove(get(index));
+			return remove(get(index));
 		}
-		return null;
+
 	}
 
 	@Override
@@ -108,7 +119,7 @@ public class MyArrayList<E> implements ListADT<E> {
 					updated[i] = array[i + 1];
 					this.array = (E[]) updated;
 					this.size = i;
-					return null;
+					return (E) toRemove;
 				} else {
 					updated[i] = array[i + 1];
 				}

@@ -13,163 +13,239 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Dan Nguyen
+ * @param <E>
  *
  */
 class MyArrayListTests {
-	ListADT<String> list;
+	ListADT<Object> list;
 
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@BeforeEach
 	void setup() throws Exception {
 		list = new MyArrayList<>();
 	}
 
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@AfterEach
 	void tearDown() throws Exception {
-		list = null;
+		list.clear();
 	}
 
 	/**
-	 * Test method for {@link utilities.MyArrayList#size()}.
+	 * Tests MyArrayList's size method
 	 */
 	@Test
 	void testSize() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+
+		list.add("boo");
+		list.add("yoki");
+
+		assertEquals(2, list.size());
 	}
 
 	/**
-	 * Test method for {@link utilities.MyArrayList#clear()}.
+	 * Tests MyArrayList's clear method
 	 */
 	@Test
 	void testClear() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+
+		list.add("goldfish");
+		list.add("frog");
+		list.add("gorilla");
+
+		assertNotNull(list);
+
+		list.clear();
+
+		assertEquals(0, list.size());
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyArrayList#add(int, java.lang.Object)}.
+	 * Tests MyArrayList's add with index method
 	 */
 	@Test
-	void testAddIntObject() {
-		fail("Not yet implemented");
+	void testAddIndex() {
+//		fail("Not yet implemented");
+
+		list.add("purple");
+		list.add("green");
+		list.add("blue");
+		list.add(1, "red");
+
+		assertEquals("red", list.get(1));
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyArrayList#add(java.lang.Object)}.
+	 * Tests MyArrayList's add method
 	 */
 	@Test
-	void testAddObject() {
-		fail("Not yet implemented");
+	void testAdd() {
+//		fail("Not yet implemented");
+
+		list.add("riki");
+
+		assertEquals("riki", list.get(0));
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyArrayList#addAll(utilities.ListADT)}.
+	 * Tests MyArrayList's add all method
 	 */
 	@Test
 	void testAddAll() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+
+		list.add("riki");
+		list.add("george");
+		list.add("marzhan");
+
+		ListADT<Object> list2 = new MyArrayList<>();
+
+		list2.add("rocky");
+		list2.add("paulie");
+		list2.add("tiana");
+
+		assertTrue(list.addAll(list2));
 	}
 
 	/**
-	 * Test method for {@link utilities.MyArrayList#get(int)}.
+	 * Tests MyArrayList's get method
 	 */
 	@Test
 	void testGet() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+
+		list.add("spike");
+
+		assertEquals("spike", list.get(0));
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyArrayList#remove(int)}.
+	 * Tests MyArrayList's remove with index method
 	 */
 	@Test
-	void testRemoveInt() {
-		fail("Not yet implemented");
+	void testRemoveIndex() {
+//		fail("Not yet implemented");
+
+		list.add("kiki");
+		list.add("lily");
+		list.add("yoki");
+
+		assertEquals("lily", list.remove(1));
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyArrayList#remove(java.lang.Object)}.
+	 * Tests MyArrayList's remove by object method
 	 */
 	@Test
 	void testRemoveObject() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+
+		list.add("luna");
+		list.add("ivy");
+		list.add("toad");
+
+		assertEquals("luna", (Object) list.remove("luna"));
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyArrayList#set(int, java.lang.Object)}.
+	 * Tests MyArrayList's set method
 	 */
 	@Test
 	void testSet() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+
+		list.add("daisy");
+		list.add("topaz");
+		list.add("sabrina");
+		list.add("zhibek");
+
+		list.set(2, "kia");
+
+		assertEquals("kia", list.get(2));
+
 	}
 
 	/**
-	 * Test method for {@link utilities.MyArrayList#isEmpty()}.
+	 * Tests MyArrayList's is empty method
 	 */
 	@Test
 	void testIsEmpty() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
+
+		assertEquals(0, list.size());
 	}
 
 	/**
-	 * Test method for {@link utilities.MyArrayList#contains(java.lang.Object)}.
+	 * Tests MyArrayList's contains method
 	 */
 	@Test
 	void testContains() {
+//		fail("Not yet implemented");
+
+		list.add("marzhan");
+		list.add("tiana");
+		list.add("george");
+		list.add("paulie");
+
+		assertTrue(list.contains("tiana"));
+		assertFalse(list.contains("rocky"));
 	}
 
 	/**
-	 * Test method for {@link utilities.MyArrayList#toArray(java.lang.Object[])}.
+	 * Tests MyArrayList's object to array method
 	 */
 	@Test
-	void testToArrayObjectArray() {
-		fail("Not yet implemented");
-	}
+	void testObjectToArray() {
+//		fail("Not yet implemented");
 
-	/**
-	 * Test method for {@link utilities.MyArrayList#toArray()}.
-	 */
-	@Test
-	void testToArray() {
-		fail("Not yet implemented");
-	}
+		list.add("way");
+		list.add("rocky");
+		list.add("daffy");
+		list.add("vinza");
+		list.add("maang");
 
-	/**
-	 * Test method for {@link utilities.MyArrayList#iterator()}.
-	 */
-	@Test
-	void testIteratorNonEmpty() {
-		list.add("A");
-		list.add("B");
-		list.add("C");
-
-		Iterator<String> it = list.iterator();
-		assertTrue(it.hasNext());
-
-		int i = 0;
-		while (it.hasNext()) {
-			assertEquals(list.get(i++), it.next());
-		}
-		assertFalse(it.hasNext());
-		try {
-			it.hasNext();
-			fail("No Such Element Exception");
-		} catch (NoSuchElementException e) {
-			assertTrue(true);
-		}
+		assertNotNull(list.toArray());
 
 	}
 
 	/**
-	 * Test method for {@link utilities.MyArrayList#iterator()}.
+	 * Tests MyArrayList's element to array method
 	 */
 	@Test
-	void testIteratorEmpty() {
-		Iterator<String> it = list.iterator();
-		assertFalse(it.hasNext());
-		try {
-			it.hasNext();
-			fail("No Such Element Exception");
-		} catch (NoSuchElementException e) {
-			assertTrue(true);
-		}
+	<E> void testElementToArray() {
+//		fail("Not yet implemented");
+
+		list.add("way");
+		list.add("rocky");
+		list.add("daffy");
+		list.add("vinza");
+		list.add("maang");
+
+		E[] array1 = (E[]) new Object[10];
+
+		assertNotNull(list.toArray(array1));
+	}
+
+	/**
+	 * Tests MyArrayList's iterator method
+	 */
+	@Test
+	void testIterator() {
+//		fail("Not yet implemented");
+
+		assertNotNull(list.iterator());
 	}
 
 }
