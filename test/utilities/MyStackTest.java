@@ -13,6 +13,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ADT.Iterator;
+import ADT.StackADT;
+import exceptions.EmptyQueueException;
+
 /**
  * @author Dan Nguyen
  * @param <E>
@@ -98,7 +102,7 @@ class MyStackTest<E> {
 	}
 
 	/**
-	 * Test method for {@link utilities.MyStack#equals(utilities.StackADT)}.
+	 * Test method for {@link utilities.MyStack#equals(ADT.StackADT)}.
 	 */
 	@Test
 	void testEqualsStackADTOfE() {
@@ -138,7 +142,7 @@ class MyStackTest<E> {
 	}
 
 	@Test
-	void testIteratorNotEmpty() {
+	void testIteratorNotEmpty() throws NullPointerException, EmptyQueueException {
 		myStack.Stack(10);
 
 		myStack.push(60);

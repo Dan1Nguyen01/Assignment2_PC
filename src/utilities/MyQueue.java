@@ -1,7 +1,11 @@
 package utilities;
 
 import java.lang.reflect.Array;
-import java.util.NoSuchElementException;
+
+import ADT.Iterator;
+import ADT.QueueADT;
+import exceptions.EmptyQueueException;
+import exceptions.FullQueueException;
 
 public class MyQueue<E> implements QueueADT<E> {
 
@@ -21,9 +25,10 @@ public class MyQueue<E> implements QueueADT<E> {
 	}
 
 	@Override
-	public E enqueue(E element) throws NullPointerException {
+	public E enqueue(E element) throws NullPointerException, FullQueueException {
+
 		if (size >= capacity) {
-			System.out.println("Queue is full");
+			throw new FullQueueException("Queue is full");
 		} else {
 			size++;
 			data[size - 1] = element;
@@ -35,9 +40,9 @@ public class MyQueue<E> implements QueueADT<E> {
 	}
 
 	@Override
-	public E dequeue() throws NullPointerException {
+	public E dequeue() throws NullPointerException, EmptyQueueException {
 		if (size < 0) {
-			throw new NullPointerException();
+			throw new EmptyQueueException("Queue is empty");
 		}
 		size--;
 		front++;
@@ -46,9 +51,9 @@ public class MyQueue<E> implements QueueADT<E> {
 	}
 
 	@Override
-	public E peek() throws NullPointerException, IndexOutOfBoundsException {
+	public E peek() throws NullPointerException, IndexOutOfBoundsException, EmptyQueueException {
 		if (size == 0) {
-			throw new NullPointerException();
+			throw new EmptyQueueException("Queue is empty");
 		}
 
 		if (front == -1) {
@@ -68,13 +73,13 @@ public class MyQueue<E> implements QueueADT<E> {
 			for (int i = 0; i < size; i++) {
 				if (data[i].equals(thatArray[i])) {
 					equals = true;
-				}else {
+				} else {
 					equals = false;
 					break;
 				}
 
 			}
-			
+
 		}
 		return equals;
 	}
@@ -94,9 +99,9 @@ public class MyQueue<E> implements QueueADT<E> {
 		}
 
 		@Override
-		public E next() throws NoSuchElementException {
+		public E next() throws EmptyQueueException {
 			if (pos >= size) {
-				throw new NoSuchElementException();
+				throw new EmptyQueueException();
 			}
 			E toReturn = data[pos++];
 			return toReturn;

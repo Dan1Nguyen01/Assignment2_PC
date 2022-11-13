@@ -1,6 +1,9 @@
-package utilities;
+package ADT;
 
 import java.io.Serializable;
+
+import exceptions.EmptyQueueException;
+import exceptions.FullQueueException;
 
 public interface QueueADT<E> extends Serializable {
 
@@ -24,10 +27,11 @@ public interface QueueADT<E> extends Serializable {
 	 * @return The element that will be enqueued
 	 * @throws NullPointerException      This exception occurs when the value of
 	 *                                   element E is null.
+	 * @throws FullQueueException
 	 * @throws IndexOutOfBoundsException This exception occurs when the value of the
 	 *                                   index is out of the Queue's bounds.
 	 */
-	public E enqueue(E element) throws NullPointerException;
+	public E enqueue(E element) throws NullPointerException, FullQueueException;
 
 	/**
 	 * 
@@ -37,9 +41,10 @@ public interface QueueADT<E> extends Serializable {
 	 * @return This will return the element that was removed from the queue.
 	 * @throws NullPointerException This exception occurs when the value of element
 	 *                              E is null.
+	 * @throws EmptyQueueException
 	 * 
 	 */
-	public E dequeue() throws NullPointerException;
+	public E dequeue() throws NullPointerException, EmptyQueueException;
 
 	/**
 	 * 
@@ -51,8 +56,9 @@ public interface QueueADT<E> extends Serializable {
 	 *                                   element E is null.
 	 * @throws IndexOutOfBoundsException This exception occurs when the value of the
 	 *                                   index is out of the Queue's bounds.
+	 * @throws EmptyQueueException
 	 */
-	public E peek() throws NullPointerException, IndexOutOfBoundsException;
+	public E peek() throws NullPointerException, IndexOutOfBoundsException, EmptyQueueException;
 
 	/**
 	 * 

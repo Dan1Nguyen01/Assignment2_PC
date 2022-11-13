@@ -1,7 +1,9 @@
 package utilities;
 
 import java.lang.reflect.Array;
-import java.util.NoSuchElementException;
+
+import ADT.Iterator;
+import ADT.ListADT;
 
 public class MyArrayList<E> implements ListADT<E> {
 
@@ -212,9 +214,9 @@ public class MyArrayList<E> implements ListADT<E> {
 		}
 
 		@Override
-		public E next() throws NoSuchElementException {
+		public E next() {
 			if (pos >= size) {
-				throw new NoSuchElementException();
+				System.out.println("No such element in the array");
 			}
 			E toReturn = array[pos++];
 			return toReturn;

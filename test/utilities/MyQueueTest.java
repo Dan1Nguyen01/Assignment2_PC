@@ -12,6 +12,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ADT.Iterator;
+import exceptions.EmptyQueueException;
+import exceptions.FullQueueException;
+
 /**
  * @author dannguyen
  *
@@ -49,9 +53,14 @@ class MyQueueTest<E> {
 
 	/**
 	 * Tests MyQueue's Enqueue method
+	 * 
+	 * @throws FullQueueException
+	 * @throws NullPointerException
+	 * @throws EmptyQueueException
+	 * @throws IndexOutOfBoundsException
 	 */
 	@Test
-	void testEnqueue() {
+	void testEnqueue() throws NullPointerException, FullQueueException, IndexOutOfBoundsException, EmptyQueueException {
 //		fail("Not yet implemented");
 
 		queue.enqueue("boo");
@@ -62,9 +71,12 @@ class MyQueueTest<E> {
 
 	/**
 	 * Tests MyQueue's Dequeue method
+	 * @throws FullQueueException 
+	 * @throws NullPointerException 
+	 * @throws EmptyQueueException 
 	 */
 	@Test
-	void testDequeue() {
+	void testDequeue() throws NullPointerException, FullQueueException, EmptyQueueException {
 		// fail("Not yet implemented");
 
 		queue.enqueue(9);
@@ -77,9 +89,13 @@ class MyQueueTest<E> {
 
 	/**
 	 * Tests MyQueue's Peek method
+	 * @throws FullQueueException 
+	 * @throws NullPointerException 
+	 * @throws EmptyQueueException 
+	 * @throws IndexOutOfBoundsException 
 	 */
 	@Test
-	void testPeek() {
+	void testPeek() throws NullPointerException, FullQueueException, IndexOutOfBoundsException, EmptyQueueException {
 
 		queue.enqueue("yoki");
 		queue.enqueue("ramen");
@@ -89,9 +105,11 @@ class MyQueueTest<E> {
 
 	/**
 	 * Tests MyQueue's Equals method
+	 * @throws FullQueueException 
+	 * @throws NullPointerException 
 	 */
 	@Test
-	void testEquals() {
+	void testEquals() throws NullPointerException, FullQueueException {
 
 		MyQueue queueOne = new MyQueue();
 		queueOne.QueueADT(20);
@@ -127,7 +145,7 @@ class MyQueueTest<E> {
 	}
 
 	@Test
-	void testIteratorNotEmpty() {
+	void testIteratorNotEmpty() throws NullPointerException, FullQueueException, IndexOutOfBoundsException, NoSuchElementException, EmptyQueueException {
 		queue.QueueADT(10);
 
 		queue.enqueue(20);
@@ -151,9 +169,11 @@ class MyQueueTest<E> {
 
 	/**
 	 * Tests MyQueue's ToArray Method that return an Object Array method
+	 * @throws FullQueueException 
+	 * @throws NullPointerException 
 	 */
 	@Test
-	void testObjectToArray() {
+	void testObjectToArray() throws NullPointerException, FullQueueException {
 
 		queue.enqueue(22);
 		queue.enqueue(23);
@@ -166,9 +186,11 @@ class MyQueueTest<E> {
 
 	/**
 	 * Tests MyQueue's ToArray Method that return an Element Array method
+	 * @throws FullQueueException 
+	 * @throws NullPointerException 
 	 */
 	@Test
-	void testElementToArray() {
+	void testElementToArray() throws NullPointerException, FullQueueException {
 
 		queue.enqueue(32);
 		queue.enqueue(33);
@@ -181,9 +203,11 @@ class MyQueueTest<E> {
 
 	/**
 	 * Tests MyQueue's Is Full method
+	 * @throws FullQueueException 
+	 * @throws NullPointerException 
 	 */
 	@Test
-	void testIsFull() {
+	void testIsFull() throws NullPointerException, FullQueueException {
 
 		MyQueue queueFull = new MyQueue();
 
@@ -201,9 +225,11 @@ class MyQueueTest<E> {
 
 	/**
 	 * Tests MyQueue's Size method
+	 * @throws FullQueueException 
+	 * @throws NullPointerException 
 	 */
 	@Test
-	void testSize() {
+	void testSize() throws NullPointerException, FullQueueException {
 
 		MyQueue queueSize = new MyQueue();
 
@@ -223,9 +249,11 @@ class MyQueueTest<E> {
 
 	/**
 	 * Tests MyQueue's Is Empty method
+	 * @throws FullQueueException 
+	 * @throws NullPointerException 
 	 */
 	@Test
-	void testIsEmpty() {
+	void testIsEmpty() throws NullPointerException, FullQueueException {
 
 		MyQueue queueEmpty = new MyQueue();
 
@@ -241,9 +269,12 @@ class MyQueueTest<E> {
 
 	/**
 	 * Tests MyQueue's Dequeue All method
+	 * 
+	 * @throws FullQueueException
+	 * @throws NullPointerException
 	 */
 	@Test
-	void testDequeueAll() {
+	void testDequeueAll() throws NullPointerException, FullQueueException {
 
 		queue.enqueue(10);
 		queue.enqueue(20);

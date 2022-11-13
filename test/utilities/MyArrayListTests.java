@@ -5,11 +5,11 @@ package utilities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.NoSuchElementException;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import ADT.ListADT;
 
 /**
  * @author Dan Nguyen
@@ -40,7 +40,7 @@ class MyArrayListTests {
 	 */
 	@Test
 	void testSize() {
-//		fail("Not yet implemented");
+
 
 		list.add("boo");
 		list.add("yoki");

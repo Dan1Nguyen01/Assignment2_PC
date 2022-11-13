@@ -3,6 +3,9 @@ package utilities;
 import java.lang.reflect.Array;
 import java.util.NoSuchElementException;
 
+import ADT.Iterator;
+import ADT.ListADT;
+
 public class MyDLL<E> implements ListADT<E> {
 	private int size;
 	private Node head;

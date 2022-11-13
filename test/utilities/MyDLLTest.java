@@ -9,11 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.NoSuchElementException;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import ADT.Iterator;
+import ADT.ListADT;
+import exceptions.EmptyQueueException;
 
 /**
  * @author Dan Nguyen
@@ -220,46 +222,41 @@ class MyDLLTest<E> {
 		assertNotNull(list.toArray(array));
 	}
 
-	/**
-	 * Tests MyDLL's iterator method to see if it's not empty.
-	 */
 	@Test
-	void testIteratorNonEmpty() {
-
-		list.add("A");
-		list.add("B");
-		list.add("C");
-
-		Iterator<String> it = list.iterator();
-		assertTrue(it.hasNext());
-
-		int i = 0;
-		while (it.hasNext()) {
-			assertEquals(list.get(i++), it.next());
-		}
-		assertFalse(it.hasNext());
-		try {
-			it.hasNext();
-			fail("No Such Element Exception");
-		} catch (NoSuchElementException e) {
-			assertTrue(true);
+	void testIterator() throws IndexOutOfBoundsException, EmptyQueueException {
+		for (int i = 0; i < 20; i++) {
+			list.add(i);
 		}
 
-	}
+		Iterator<Integer> testIterator1 = list.iterator();
 
-	/**
-	 * Tests MyDLL's iterator method to see if it's empty.
-	 */
-	@Test
-	void testIteratorEmpty() {
+		for (int i = 0; i < list.size() - 1; i++) {
+			assertTrue(testIterator1.hasNext());
+			try {
+				assertEquals(list.get(i), testIterator1.next());
+			} catch (IndexOutOfBoundsException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (EmptyQueueException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
-		Iterator<String> it = list.iterator();
-		assertFalse(it.hasNext());
-		try {
-			it.hasNext();
-			fail("No Such Element Exception");
-		} catch (NoSuchElementException e) {
-			assertTrue(true);
+		ListADT<String> list2 = new MyDLL();
+		Iterator<String> testIterator2 = list2.iterator();
+
+		assertFalse(testIterator2.hasNext());
+
+		for (int i = 0; i < 20; i++) {
+			list2.add("iterator" + i);
+		}
+
+		testIterator2 = list2.iterator();
+
+		for (int i = 0; i < list2.size() - 1; i++) {
+			assertTrue(testIterator2.hasNext());
+			assertEquals(list2.get(i), testIterator2.next());
 		}
 	}
 

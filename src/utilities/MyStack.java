@@ -1,9 +1,11 @@
 package utilities;
 
 import java.lang.reflect.Array;
-import java.util.NoSuchElementException;
 
 import javax.lang.model.type.ArrayType;
+
+import ADT.Iterator;
+import ADT.StackADT;
 
 public class MyStack<E> implements StackADT<E> {
 
@@ -100,9 +102,9 @@ public class MyStack<E> implements StackADT<E> {
 		}
 
 		@Override
-		public E next() throws NoSuchElementException {
+		public E next() {
 			if (pos >= size) {
-				throw new NoSuchElementException();
+				System.out.println("No Such element in the stack");
 			}
 			E toReturn = data[pos++];
 			return toReturn;

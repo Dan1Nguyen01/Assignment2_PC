@@ -1,6 +1,8 @@
-package utilities;
+package ADT;
 
 import java.util.NoSuchElementException;
+
+import exceptions.EmptyQueueException;
 
 /**
  * This interface will provide an mono-directional iterator for any of the
@@ -30,8 +32,8 @@ public interface Iterator<E>
 	 * Returns the next element in the iteration.
 	 * 
 	 * @return The next element in the iteration.
-	 * @throws NoSuchElementException
-	 * 			If the iteration has no more elements.
+	 * @throws NoSuchElementException If the iteration has no more elements.
+	 * @throws EmptyQueueException
 	 */
-	public E next() throws NoSuchElementException;
+	public E next() throws NoSuchElementException, EmptyQueueException;
 }
