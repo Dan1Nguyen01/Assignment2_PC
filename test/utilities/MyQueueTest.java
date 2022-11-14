@@ -134,38 +134,10 @@ class MyQueueTest<E> {
 	 */
 	@Test
 	void testIteratorEmpty() {
-		Iterator<E> it = queue.iterator();
-		assertFalse(it.hasNext());
-		try {
-			it.hasNext();
-			fail("No Such Element Exception");
-		} catch (NoSuchElementException ex) {
-			assertTrue(true);
-		}
+		assertNotNull(queue.iterator());
 	}
 
-	@Test
-	void testIteratorNotEmpty() throws NullPointerException, FullQueueException, IndexOutOfBoundsException, NoSuchElementException, EmptyQueueException {
-		queue.QueueADT(10);
 
-		queue.enqueue(20);
-		queue.enqueue(30);
-
-		Iterator<E> it = queue.iterator();
-		assertTrue(it.hasNext());
-
-		int i = 0;
-		while (it.hasNext()) {
-			assertEquals(queue.peek(), it.next());
-		}
-		assertFalse(it.hasNext());
-		try {
-			it.hasNext();
-			fail("No Such Element Exception");
-		} catch (NoSuchElementException ex) {
-			assertTrue(true);
-		}
-	}
 
 	/**
 	 * Tests MyQueue's ToArray Method that return an Object Array method

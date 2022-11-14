@@ -94,7 +94,7 @@ public class MyStack<E> implements StackADT<E> {
 	private class MyStackIterator implements Iterator {
 		private int pos;
 		private int size;
-
+		E toReturn;
 		@Override
 		public boolean hasNext() {
 			// TODO Auto-generated method stub
@@ -105,8 +105,10 @@ public class MyStack<E> implements StackADT<E> {
 		public E next() {
 			if (pos >= size) {
 				System.out.println("No Such element in the stack");
+			}else {
+				 toReturn = data[pos++];
 			}
-			E toReturn = data[pos++];
+			
 			return toReturn;
 		}
 

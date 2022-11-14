@@ -130,42 +130,10 @@ class MyStackTest<E> {
 	 * Test method for {@link utilities.MyStack#iterator()}.
 	 */
 	@Test
-	void testIteratorEmpty() {
-		Iterator<E> it = stack.iterator();
-		assertFalse(it.hasNext());
-		try {
-			it.hasNext();
-			fail("No Such Element Exception");
-		} catch (NoSuchElementException e) {
-			assertTrue(true);
-		}
+	void testIterator() {
+		assertNotNull(myStack.iterator());
 	}
-
-	@Test
-	void testIteratorNotEmpty() throws NullPointerException, EmptyQueueException {
-		myStack.Stack(10);
-
-		myStack.push(60);
-		myStack.push(30);
-
-		Iterator<E> it = stack.iterator();
-		assertTrue(it.hasNext());
-
-		int i = 0;
-		while (it.hasNext()) {
-			assertEquals(myStack.peek(), it.next());
-
-		}
-		assertFalse(it.hasNext());
-		try {
-			it.hasNext();
-			fail("No Such Element Exception");
-
-		} catch (NoSuchElementException e) {
-			assertTrue(true);
-		}
-
-	}
+	
 
 	/**
 	 * Test method for {@link utilities.MyStack#toArray()}.
